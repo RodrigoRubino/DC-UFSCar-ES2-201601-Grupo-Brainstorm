@@ -1,4 +1,4 @@
-// Generated from /Users/alexandrerocha/Documents/ES2/jabref/src/main/antlr4/net/sf/jabref/search/Search.g4 by ANTLR 4.5.3
+// Generated from C:\Users\rteix\git\DC-UFSCar-ES2-201601-Grupo-Brainstorm-\src\main\antlr4\net\sf\jabref\search\Search.g4 by ANTLR 4.5.3
 package net.sf.jabref.search;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
