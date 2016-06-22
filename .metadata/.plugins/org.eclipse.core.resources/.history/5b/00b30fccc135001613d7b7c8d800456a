@@ -1,0 +1,13 @@
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+
+public class importCurrentDatabaseTest {
+
+    @Test
+    public void test() {
+        fail("Not yet implemented");
+    }
+
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ImportFormatReaderTestParameterless" project="JabRef" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="net.sf.jabref.importer.ImportFormatReaderTestParameterless" time="1.859">
+    <testcase name="testNullImportUnknownFormat" classname="net.sf.jabref.importer.ImportFormatReaderTestParameterless" time="1.741"/>
+    <testcase name="testImportUnknownFormatNotWorking" classname="net.sf.jabref.importer.ImportFormatReaderTestParameterless" time="0.095"/>
+    <testcase name="testImportFromFileUnknownFormat" classname="net.sf.jabref.importer.ImportFormatReaderTestParameterless" time="0.023"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="657" key="dialogHeight"/>
+		<item value="1050" key="dialogWidth"/>
+		<list key="textEntries">
+			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
+		</list>
+		<list key="orderedElements">
+			<item value="org.eclipse.jdt.ui.CompilationUnitEditorJabRef/src/main/java/net/sf/jabref/gui/OpenFileFilter.java"/>
+			<item value="org.eclipse.jdt.ui.CompilationUnitEditorJabRef/src/test/java/net/sf/jabref/bibtex/BibEntryAssert.java"/>
+			<item value="org.eclipse.jdt.ui.CompilationUnitEditorJabRef/src/test/java/net/sf/jabref/bibtex/BibEntryWriterTest.java"/>
+		</list>
+		<list key="orderedProviders">
+			<item value="org.eclipse.ui.editors"/>
+			<item value="org.eclipse.ui.editors"/>
+			<item value="org.eclipse.ui.editors"/>
+		</list>
+		<list key="textArray">
+			<item value="openfilefilter"/>
+			<item value="bibte"/>
+			<item value="bibtex"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item value="com.objectaid.uml.new.classdiagram" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="com.objectaid.uml.new"/>
+		</list>
+	</section>
+	<section name="ImportExportAction">
+		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+</section>

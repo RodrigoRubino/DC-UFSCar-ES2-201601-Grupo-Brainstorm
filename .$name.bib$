@@ -1,0 +1,33 @@
+% Encoding: UTF-8
+
+@Article{Artigo,
+  author  = {Alexandre},
+  title   = {Título},
+  journal = {AACN Clinical Issues},
+  year    = {2016},
+}
+
+@Book{Livro,
+  title     = {Título},
+  publisher = {Editor},
+  year      = {2016},
+  author    = {Alexandre},
+  editor    = {Redator},
+}
+
+@Article{Alexandre2016,
+  author  = {Alexandre},
+  title   = {Título},
+  journal = {AACN Clinical Issues},
+  year    = {2016},
+}
+
+@Book{Alexandre2016a,
+  title     = {Título},
+  publisher = {Editor},
+  year      = {2016},
+  author    = {Alexandre},
+  editor    = {Redator},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

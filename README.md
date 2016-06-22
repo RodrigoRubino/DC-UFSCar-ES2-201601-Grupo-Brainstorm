@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # JabRef Development Version
 
 [![Build Status](https://travis-ci.org/JabRef/jabref.svg?branch=master)](https://travis-ci.org/JabRef/jabref)
@@ -131,6 +130,3 @@ See [external libraries](external-libraries.txt) for details.
   [Biblatex]: https://www.ctan.org/pkg/biblatex
   [install4j]: https://www.ej-technologies.com/products/install4j/overview.html
   [JabRef]: http://www.jabref.org
-=======
-# DC-UFSCar-ES2-201601-Grupo-Brainstorm
->>>>>>> 2b10715659aac5b1edaf5ff5838e09bae3c2f238

@@ -1,0 +1,38 @@
+import java.io.IOException;
+import java.io.InputStream;
+import org.junit.Test;
+import org.junit.Before;
+import static org.junit.Assert.*;
+
+import net.sf.jabref.*;
+import net.sf.jabref.importer.fileformat.BibtexImporter;
+import net.sf.jabref.importer.fileformat.BibtexImporterTest;
+
+public class importCurrentDatabaseTest {
+
+    private BibtexImporter importacao;
+
+    @Before
+    public void setUp() {
+        Globals.prefs = JabRefPreferences.getInstance();
+        importacao = new BibtexImporter();
+    }
+
+    @Test
+    public void formatoValido() throws IOException {
+        try (InputStream arquivoEntrada = BibtexImporterTest.class.getResourceAsStream("nome.bib")) {
+            assertTrue(importacao.isRecognizedFormat(arquivoEntrada));
+        }
+    }
+    
+    @Test
+    public void NomeFormato() {
+        assertEquals("BibTeX", importacao.getFormatName());
+    }
+
+    @Test
+    public void TesteExtensao() {
+        assertEquals("bib", importacao.getExtensions());
+    }
+
+}
