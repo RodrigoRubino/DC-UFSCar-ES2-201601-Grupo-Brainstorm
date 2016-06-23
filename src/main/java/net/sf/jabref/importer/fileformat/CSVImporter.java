@@ -198,7 +198,7 @@ public class CSVImporter extends ImportFormat {
                         // hm.put("",entry.getValue().toString());
                     }
                 }
-        
+
                 String bibtexType = "misc";
                 // to find type, first check TW, then RT
                 for (int i = 1; (i >= 0) && "misc".equals(bibtexType); --i) {
@@ -227,7 +227,7 @@ public class CSVImporter extends ImportFormat {
                         bibtexType = "phdthesis";
                     }
                 }
-        
+
                 // depending on bibtexType, decide where to place the titleRT and
                 // titleTI
                 if ("article".equals(bibtexType)) {
@@ -254,28 +254,28 @@ public class CSVImporter extends ImportFormat {
                         hm.put("title", titleTI);
                     }
                 }
-        
+
                 // concatenate pages
                 if ((pages[0] != null) || (pages[1] != null)) {
                     hm.put("pages", (pages[0] == null ? "" : pages[0]) + (pages[1] == null ? "" : "--" + pages[1]));
                 }
-        
+
                 // concatenate address and country
                 if (address != null) {
                     hm.put("address", address + (country == null ? "" : ", " + country));
                 }
-        
+
                 if (!comments.isEmpty()) { // set comment if present
                     hm.put("comment", String.join(";", comments));
                 }
                 BibEntry b = new BibEntry(DEFAULT_BIBTEXENTRY_ID, bibtexType);
                 b.setField(hm);
                 bibItems.add(b);
-        
+
                 hm.clear();
                 lines.clear();
                 previousLine = null;
-        
+
                 continue;
             }
             // new key
@@ -292,6 +292,7 @@ public class CSVImporter extends ImportFormat {
             previousLine.append(line.trim());
         }
         */
+        //oputro teste
         return bibItems;
     }
 
