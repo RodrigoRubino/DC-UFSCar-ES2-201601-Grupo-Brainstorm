@@ -176,6 +176,90 @@ public class entradaBibtex {
 
     }
 
+    String cGrande = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+    String nGrande = "9999999999999999999999999999999999999999999999999999999999999999999"
+            + "99999999999999999999999999999999999999999999999999999999999999999999999999"
+            + "99999999999999999999999999999999999999999999999999999999999999999999999999";
+    @Test
+    public void stringsGrandesArtigo() throws IOException {
+        StringWriter stringWriter = new StringWriter();
+        BibEntry entry = new BibEntry("1", "article");
+        entry.setField("author", cGrande);
+        entry.setField("title", cGrande);
+        entry.setField("journal",cGrande);
+        entry.setField("year", nGrande);
+        entry.setField("volume", nGrande);
+        entry.setField("number", nGrande);
+        entry.setField("pages", nGrande);
+        entry.setField("month", nGrande);
+        entry.setField("note", cGrande);
+
+        writer.write(entry, stringWriter, BibDatabaseMode.BIBTEX);
+
+        String atual = stringWriter.toString();
+
+        String esperado = Globals.NEWLINE + "@Article{," + Globals.NEWLINE +
+                "  author  = {"+cGrande+"}," + Globals.NEWLINE+
+                "  title   = {"+cGrande+"}," + Globals.NEWLINE+
+                "  journal = {"+cGrande+"}," + Globals.NEWLINE+
+                "  year    = {"+nGrande+"}," + Globals.NEWLINE+
+                "  volume  = {"+nGrande+"}," + Globals.NEWLINE+
+                "  number  = {"+nGrande+"}," + Globals.NEWLINE +
+                "  pages   = {"+nGrande+"}," + Globals.NEWLINE+
+                "  month   = {"+nGrande+"}," + Globals.NEWLINE +
+                "  note    = {"+cGrande+"}," + Globals.NEWLINE+
+
+                "}" + Globals.NEWLINE;
+
+        assertEquals(esperado, atual);
+
+    }
+
+    @Test
+    public void stringsGrandesLivro() throws IOException {
+        StringWriter stringWriter = new StringWriter();
+        BibEntry entry = new BibEntry("1", "book");
+        entry.setField("title", cGrande);
+        entry.setField("publisher", cGrande);
+        entry.setField("year",nGrande);
+        entry.setField("author", cGrande);
+        entry.setField("editor", cGrande);
+        entry.setField("volume", nGrande);
+        entry.setField("number", nGrande);
+        entry.setField("series", nGrande);
+        entry.setField("edition", nGrande);
+        entry.setField("month", nGrande);
+        entry.setField("note", cGrande);
+        entry.setField("adress", cGrande);
+
+        writer.write(entry, stringWriter, BibDatabaseMode.BIBTEX);
+
+        String atual = stringWriter.toString();
+
+        String esperado = Globals.NEWLINE + "@Book{," + Globals.NEWLINE +
+                "  title     = {"+cGrande+"}," + Globals.NEWLINE+
+                "  publisher = {"+cGrande+"}," + Globals.NEWLINE+
+                "  year      = {"+nGrande+"}," + Globals.NEWLINE+
+                "  author    = {"+cGrande+"}," + Globals.NEWLINE+
+                "  editor    = {"+cGrande+"}," + Globals.NEWLINE+
+                "  volume    = {"+nGrande+"}," + Globals.NEWLINE +
+                "  number    = {"+nGrande+"}," + Globals.NEWLINE+
+                "  series    = {"+nGrande+"}," + Globals.NEWLINE +
+                "  edition   = {"+nGrande+"}," + Globals.NEWLINE+
+                "  month     = {"+nGrande+"}," + Globals.NEWLINE+
+                "  note      = {"+cGrande+"}," + Globals.NEWLINE+
+                "  adress    = {"+cGrande+"}," + Globals.NEWLINE+
+
+                "}" + Globals.NEWLINE;
+
+        assertEquals(esperado, atual);
+
+    }
+
+
 
 
 }
