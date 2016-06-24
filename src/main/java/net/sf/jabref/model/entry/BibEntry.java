@@ -342,6 +342,28 @@ public class BibEntry {
         fields.forEach((field, value) -> setField(field, value));
     }
 
+    public Boolean AnoValido(String ano) {
+        int ano_max = Calendar.getInstance().get(Calendar.YEAR);
+        int ano_min = 1600;
+        int ano_inserido = Integer.parseInt(ano);
+
+        if (ano.length() != 4) {
+            return false;
+        } else {
+            char[] digito_ano = ano.toCharArray();
+            if ((!Character.isDigit(digito_ano[0])) && (!Character.isDigit(digito_ano[1]))
+                    && (!Character.isDigit(digito_ano[2])) && (!Character.isDigit(digito_ano[3]))) {
+                return false;
+            } else {
+                if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Set a field, and notify listeners about the change.
      *
