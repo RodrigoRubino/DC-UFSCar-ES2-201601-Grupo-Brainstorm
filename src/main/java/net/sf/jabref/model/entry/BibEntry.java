@@ -370,15 +370,14 @@ public class BibEntry {
 
         if (!CaracterString(ano)) {
             int ano_inserido = Integer.parseInt(ano);
+            if ((ano_inserido >= ano_min) || (ano_inserido <= ano_max)) {
+                return true;
+            }
         } else {
             return false;
         }
 
-        if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     /*
