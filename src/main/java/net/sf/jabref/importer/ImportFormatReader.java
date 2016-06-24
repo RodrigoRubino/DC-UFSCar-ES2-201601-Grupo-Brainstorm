@@ -32,6 +32,7 @@ import java.util.TreeSet;
 
 import net.sf.jabref.Globals;
 import net.sf.jabref.importer.fileformat.BibTeXMLImporter;
+import net.sf.jabref.importer.fileformat.CSVImporter;
 import net.sf.jabref.importer.fileformat.BiblioscapeImporter;
 import net.sf.jabref.importer.fileformat.BibtexImporter;
 import net.sf.jabref.importer.fileformat.CopacImporter;
@@ -72,6 +73,7 @@ public class ImportFormatReader {
         formats.clear();
 
         formats.add(new BiblioscapeImporter());
+        formats.add(new CSVImporter());
         formats.add(new BibtexImporter());
         formats.add(new BibTeXMLImporter());
         formats.add(new CopacImporter());
