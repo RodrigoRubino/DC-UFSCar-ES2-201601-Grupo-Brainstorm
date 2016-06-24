@@ -33,8 +33,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.swing.JOptionPane;
 
 import net.sf.jabref.model.database.BibDatabase;
 
@@ -342,6 +345,51 @@ public class BibEntry {
         fields.forEach((field, value) -> setField(field, value));
     }
 
+    /*
+     * Funcao booleana que retorna se o ano e valido no calendario ocidental ou nao
+     * O ano minimo foi baseado na primeira edicao da biblia que e datada de ser por volta de 1600
+     * O ano maximo e o ano vigente
+     * A funcao analisa se o ano esta entre estes anos limites e se possui algum caracter dentro dele
+    */
+    public Boolean AnoValido(String ano) {
+        int ano_max = Calendar.getInstance().get(Calendar.YEAR);
+        int ano_min = 1600;
+        int ano_inserido;
+
+        try {
+            ano_inserido = Integer.parseInt(ano);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ano invalido. O ano deve possuir apenas algarismos.");
+            return false;
+        }
+
+        if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    /*
+     * Funcao para criacao de uma bibtex automatica de 5 caracteres
+     * Podem haver caracteres com letras maiusculas e minusculas
+     */
+    public String BibtexAutomatica() {
+        char[] alfabeto = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz".toCharArray();
+        StringBuilder bibtex_aux = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            char chave = alfabeto[random.nextInt(alfabeto.length)];
+            bibtex_aux.append(chave);
+        }
+
+        String bibtex = bibtex_aux.toString();
+
+        return bibtex;
+    }
+
     /**
      * Set a field, and notify listeners about the change.
      *
@@ -364,6 +412,29 @@ public class BibEntry {
         }
 
         changed = true;
+
+        /*
+         * Validacao do ano em um artigo ou livro ate que um valor admitido seja inserido
+         * Foi utilizada uma funcao grafica de pop up para insistencia de entrada de um valor valido
+         * Desta maneira o ano passa a ser um campo de entrada obrigatoria.
+         * Validacao de uma BibtexKey. Caso ela seja menor que dois caracteres ou possua um digito no
+         * seu inicio, uma BibtexKey e criada automaticamente somente com caracteres e com tamanho 5.
+         */
+        if ((type.equals("article")) || (type.equals("book"))) {
+            if (name.equals("year")) {
+                while (!AnoValido(value)) {
+                    value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                }
+            }
+
+            if (name.equals("bibtexkey")) {
+                char[] bibtex = value.toCharArray();
+                if ((value.length() < 2) || (Character.isDigit(bibtex[0]))) {
+                    JOptionPane.showMessageDialog(null, "BibtexKey criada automaticamente.");
+                    value = BibtexAutomatica();
+                }
+            }
+        }
 
         String oldValue = fields.get(fieldName);
         try {
