@@ -346,6 +346,19 @@ public class BibEntry {
     }
 
     /*
+     * Funcao para determinar se uma string possui alguma letra
+     */
+    public Boolean CaracterString(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /*
      * Funcao booleana que retorna se o ano e valido no calendario ocidental ou nao
      * O ano minimo foi baseado na primeira edicao da biblia que e datada de ser por volta de 1600
      * O ano maximo e o ano vigente
@@ -425,8 +438,18 @@ public class BibEntry {
          */
         if ((type.equals("article")) || (type.equals("book"))) {
             if (name.equals("year")) {
-                while (!AnoValido(value)) {
-                    value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                boolean flag = true;
+                if (CaracterString(value)) {
+                    while (flag) {
+                        value = JOptionPane.showInputDialog("Um ano deve possuir apenas numeros. Digite novamente.");
+                        if (!CaracterString(value)) {
+                            flag = false;
+                        }
+                    }
+                } else {
+                    while (!AnoValido(value)) {
+                        value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                    }
                 }
             }
 
