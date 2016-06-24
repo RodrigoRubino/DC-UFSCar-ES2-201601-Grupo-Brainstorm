@@ -27,6 +27,7 @@ import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefPreferences;
@@ -46,26 +47,75 @@ public class ImportFormats {
 
         SortedSet<ImportFormat> importers = Globals.IMPORT_FORMAT_READER.getImportFormats();
 
+
         String lastUsedFormat = Globals.prefs.get(JabRefPreferences.LAST_USED_IMPORT);
         FileFilter defaultFilter = null;
         JFileChooser fc = new JFileChooser(currentDir);
+
+        //------------------
+
         Set<ImportFileFilter> filters = new TreeSet<>();
+
         for (ImportFormat format : importers) {
             ImportFileFilter filter = new ImportFileFilter(format);
-            filters.add(filter);
+            //Inicio da manutencao perfectiva para filtrar arquivos com extensao fixa
+            if (format.getFormatName().toLowerCase().equals("bibtex")) {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), "bib");
+                fc.addChoosableFileFilter(filtro);
+            } else if (format.getFormatName().toLowerCase().equals("csv")) {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), "csv");
+                fc.addChoosableFileFilter(filtro);
+            } else if (format.getFormatName().toLowerCase().equals("isi")) {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), "isi");
+                fc.addChoosableFileFilter(filtro);
+            } else if (format.getFormatName().toLowerCase().contains("pdf")) {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), "pdf");
+                fc.addChoosableFileFilter(filtro);
+            }
+            //Fim da manutencao perfectiva
+            else {
+                filters.add(filter);
+            }
+
             if (format.getFormatName().equals(lastUsedFormat)) {
                 defaultFilter = filter;
             }
         }
+
         for (ImportFileFilter filter : filters) {
             fc.addChoosableFileFilter(filter);
         }
 
+        //-------------------
+        /*
+        Set<FileFilter> filters = new TreeSet<>();
+        for (ImportFormat format : importers) {
+            JOptionPane.showMessageDialog(null, format.getExtensions());
+
+            if (format.getExtensions() != null) {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), format.getExtensions());
+                fc.addChoosableFileFilter(filtro);
+                if (format.getFormatName().equals(lastUsedFormat)) {
+                    defaultFilter = filtro;
+                }
+            } else {
+                FileFilter filtro = new FileNameExtensionFilter(format.getFormatName(), format.getFormatName());
+                fc.addChoosableFileFilter(filtro);
+                if (format.getFormatName().equals(lastUsedFormat)) {
+                    defaultFilter = filtro;
+                }
+            }
+
+
+        }
+        */
+        //----------
         if (defaultFilter == null) {
             fc.setFileFilter(fc.getAcceptAllFileFilter());
         } else {
             fc.setFileFilter(defaultFilter);
         }
+
         return fc;
     }
 
