@@ -362,26 +362,20 @@ public class BibEntry {
      * Funcao booleana que retorna se o ano e valido no calendario ocidental ou nao
      * O ano minimo foi baseado na primeira edicao da biblia que e datada de ser por volta de 1600
      * O ano maximo e o ano vigente
-     * A funcao analisa se a string possui quatro caracteres (numero de caracteres que compreendem os anos)
-     * se estes caracteres sao apenas digitos e se o ano esta no intervalo admitido para um artigo ou livro publicado
+     * A funcao analisa se o ano esta entre estes anos limites e se possui algum caracter dentro dele
     */
     public Boolean AnoValido(String ano) {
         int ano_max = Calendar.getInstance().get(Calendar.YEAR);
         int ano_min = 1600;
-        int ano_inserido = Integer.parseInt(ano);
 
-        if (ano.length() != 4) {
-            return false;
+        if (!CaracterString(ano)) {
+            int ano_inserido = Integer.parseInt(ano);
         } else {
-            char[] digito_ano = ano.toCharArray();
-            if ((!Character.isDigit(digito_ano[0])) && (!Character.isDigit(digito_ano[1]))
-                    && (!Character.isDigit(digito_ano[2])) && (!Character.isDigit(digito_ano[3]))) {
-                return false;
-            } else {
-                if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
-                    return false;
-                }
-            }
+            return false;
+        }
+
+        if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
+            return false;
         }
 
         return true;
@@ -438,14 +432,8 @@ public class BibEntry {
          */
         if ((type.equals("article")) || (type.equals("book"))) {
             if (name.equals("year")) {
-                boolean flag = true;
-                if ((CaracterString(value)) || (!AnoValido(value))) {
-                    while (flag) {
-                        value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
-                        if ((!CaracterString(value)) && (AnoValido(value))) {
-                            flag = false;
-                        }
-                    }
+                while (!AnoValido(value)) {
+                    value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
                 }
             }
 
