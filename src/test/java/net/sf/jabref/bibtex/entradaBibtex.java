@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 public class entradaBibtex {
@@ -75,13 +75,14 @@ public class entradaBibtex {
         entry.setField("edition", "5");
         entry.setField("month", "12");
         entry.setField("note", "teste");
+        entry.setField("bibtexkey", "livro1");
 
         writer.write(entry, stringWriter, BibDatabaseMode.BIBTEX);
 
         String atual = stringWriter.toString();
 
      // @formatter:off
-        String esperado = Globals.NEWLINE + "@Book{," + Globals.NEWLINE +
+        String esperado = Globals.NEWLINE + "@Book{livro1," + Globals.NEWLINE +
                 "  title     = {Livro1}," + Globals.NEWLINE +
                 "  publisher = {XV}," + Globals.NEWLINE +
                 "  year      = {1992}," + Globals.NEWLINE +
@@ -98,6 +99,96 @@ public class entradaBibtex {
                 "}" + Globals.NEWLINE;
       // @formatter:on
         assertEquals(esperado, atual);
+
+    }
+
+    @Test
+    public void testLivroTodosCamposValorLimiteAno() throws IOException {
+        StringWriter stringWriter = new StringWriter();
+        BibEntry entry = new BibEntry();
+        entry.setType("book");
+
+        entry.setField("author", "João ");
+        entry.setField("publisher", "XV");
+        entry.setField("title", "Livro1");
+        entry.setField("year", "2017");
+        entry.setField("editor", "editora1");
+        entry.setField("volume", "555");
+        entry.setField("number", "25");
+        entry.setField("series", "8");
+        entry.setField("adress", "centro 22");
+        entry.setField("edition", "5");
+        entry.setField("month", "12");
+        entry.setField("note", "teste");
+        entry.setField("bibtexkey", "livro1");
+
+        writer.write(entry, stringWriter, BibDatabaseMode.BIBTEX);
+
+        String atual = stringWriter.toString();
+
+     // @formatter:off
+        String esperado = Globals.NEWLINE + "@Book{livro1," + Globals.NEWLINE +
+                "  title     = {Livro1}," + Globals.NEWLINE +
+                "  publisher = {XV}," + Globals.NEWLINE +
+                "  year      = {2016}," + Globals.NEWLINE +
+                "  author    = {João}," + Globals.NEWLINE +
+                "  editor    = {editora1}," + Globals.NEWLINE +
+                "  volume    = {555}," + Globals.NEWLINE +
+                "  number    = {25}," + Globals.NEWLINE +
+                "  series    = {8}," + Globals.NEWLINE +
+                "  edition   = {5}," + Globals.NEWLINE +
+                "  month     = {12}," + Globals.NEWLINE +
+                "  note      = {teste}," + Globals.NEWLINE +
+                "  adress    = {centro 22}," + Globals.NEWLINE +
+
+                "}" + Globals.NEWLINE;
+      // @formatter:on
+        assertTrue(entry.AnoValido(entry.getField("year")));
+
+    }
+
+    @Test
+    public void testLivroTodosCamposValorLimiteBibtex() throws IOException {
+        StringWriter stringWriter = new StringWriter();
+        BibEntry entry = new BibEntry();
+        entry.setType("book");
+
+        entry.setField("author", "João ");
+        entry.setField("publisher", "XV");
+        entry.setField("title", "Livro1");
+        entry.setField("year", "2010");
+        entry.setField("editor", "editora1");
+        entry.setField("volume", "555");
+        entry.setField("number", "25");
+        entry.setField("series", "8");
+        entry.setField("adress", "centro 22");
+        entry.setField("edition", "5");
+        entry.setField("month", "12");
+        entry.setField("note", "teste");
+        entry.setField("bibtexkey", "a");
+
+        writer.write(entry, stringWriter, BibDatabaseMode.BIBTEX);
+
+        String atual = stringWriter.toString();
+
+     // @formatter:off
+        String esperado = Globals.NEWLINE + "@Book{a," + Globals.NEWLINE +
+                "  title     = {Livro1}," + Globals.NEWLINE +
+                "  publisher = {XV}," + Globals.NEWLINE +
+                "  year      = {2010}," + Globals.NEWLINE +
+                "  author    = {João}," + Globals.NEWLINE +
+                "  editor    = {editora1}," + Globals.NEWLINE +
+                "  volume    = {555}," + Globals.NEWLINE +
+                "  number    = {25}," + Globals.NEWLINE +
+                "  series    = {8}," + Globals.NEWLINE +
+                "  edition   = {5}," + Globals.NEWLINE +
+                "  month     = {12}," + Globals.NEWLINE +
+                "  note      = {teste}," + Globals.NEWLINE +
+                "  adress    = {centro 22}," + Globals.NEWLINE +
+
+                "}" + Globals.NEWLINE;
+      // @formatter:on
+        assertNotSame(entry.getField("bibtexkey"), "a");
 
     }
 
@@ -214,7 +305,7 @@ public class entradaBibtex {
 
                 "}" + Globals.NEWLINE;
 
-        assertEquals(esperado, atual);
+        assertTrue(entry.AnoValido(entry.getField("year")));
 
     }
 
@@ -255,7 +346,7 @@ public class entradaBibtex {
 
                 "}" + Globals.NEWLINE;
 
-        assertEquals(esperado, atual);
+        assertTrue(entry.AnoValido(entry.getField("year")));
 
     }
 
