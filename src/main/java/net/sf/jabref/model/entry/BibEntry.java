@@ -346,19 +346,6 @@ public class BibEntry {
     }
 
     /*
-     * Funcao para determinar se uma string possui alguma letra
-     */
-    public Boolean CaracterString(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /*
      * Funcao booleana que retorna se o ano e valido no calendario ocidental ou nao
      * O ano minimo foi baseado na primeira edicao da biblia que e datada de ser por volta de 1600
      * O ano maximo e o ano vigente
@@ -367,17 +354,21 @@ public class BibEntry {
     public Boolean AnoValido(String ano) {
         int ano_max = Calendar.getInstance().get(Calendar.YEAR);
         int ano_min = 1600;
+        int ano_inserido;
 
-        if (!CaracterString(ano)) {
-            int ano_inserido = Integer.parseInt(ano);
-            if ((ano_inserido >= ano_min) || (ano_inserido <= ano_max)) {
-                return true;
-            }
-        } else {
+        try {
+            ano_inserido = Integer.parseInt(ano);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ano invalido. O ano deve possuir apenas algarismos.");
             return false;
         }
 
-        return false;
+        if ((ano_inserido < ano_min) || (ano_inserido > ano_max)) {
+            return false;
+        }
+
+        return true;
+
     }
 
     /*
