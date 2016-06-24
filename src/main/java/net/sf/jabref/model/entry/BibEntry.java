@@ -419,12 +419,22 @@ public class BibEntry {
         /*
          * Validacao do ano em um artigo ou livro ate que um valor admitido seja inserido
          * Foi utilizada uma funcao grafica de pop up para insistencia de entrada de um valor valido
-         * Desta maneira o ano passa a ser um campo de entrada obrigatoria
+         * Desta maneira o ano passa a ser um campo de entrada obrigatoria.
+         * Validacao de uma BibtexKey. Caso ela seja menor que dois caracteres ou possua um digito no
+         * seu inicio, uma BibtexKey e criada automaticamente somente com caracteres e com tamanho 5.
          */
         if ((type.equals("article")) || (type.equals("book"))) {
             if (name.equals("year")) {
                 while (!AnoValido(value)) {
                     value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                }
+            }
+
+            if (name.equals("bibtexkey")) {
+                char[] bibtex = value.toCharArray();
+                if ((value.length() < 2) || (Character.isDigit(bibtex[0]))) {
+                    JOptionPane.showMessageDialog(null, "BibtexKey criada automaticamente.");
+                    value = BibtexAutomatica();
                 }
             }
         }
