@@ -36,6 +36,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.JOptionPane;
+
 import net.sf.jabref.model.database.BibDatabase;
 
 import com.google.common.base.Strings;
@@ -342,6 +344,13 @@ public class BibEntry {
         fields.forEach((field, value) -> setField(field, value));
     }
 
+    /*
+     * Funcao booleana que retorna se o ano e valido no calendario ocidental ou nao
+     * O ano minimo foi baseado na primeira edicao da biblia que e datada de ser por volta de 1600
+     * O ano maximo e o ano vigente
+     * A funcao analisa se a string possui quatro caracteres (numero de caracteres que compreendem os anos)
+     * se estes caracteres sao apenas digitos e se o ano esta no intervalo admitido para um artigo ou livro publicado
+    */
     public Boolean AnoValido(String ano) {
         int ano_max = Calendar.getInstance().get(Calendar.YEAR);
         int ano_min = 1600;
@@ -386,6 +395,19 @@ public class BibEntry {
         }
 
         changed = true;
+
+        /*
+         * Validacao do ano em um artigo ou livro ate que um valor admitido seja inserido
+         * Foi utilizada uma funcao grafica de pop up para insistencia de entrada de um valor valido
+         * Desta maneira o ano passa a ser um campo de entrada obrigatoria
+         */
+        if ((type.equals("article")) || (type.equals("book"))) {
+            if (name.equals("year")) {
+                while (!AnoValido(value)) {
+                    value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                }
+            }
+        }
 
         String oldValue = fields.get(fieldName);
         try {
