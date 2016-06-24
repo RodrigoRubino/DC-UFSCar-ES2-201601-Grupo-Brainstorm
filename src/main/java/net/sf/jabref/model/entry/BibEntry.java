@@ -439,16 +439,12 @@ public class BibEntry {
         if ((type.equals("article")) || (type.equals("book"))) {
             if (name.equals("year")) {
                 boolean flag = true;
-                if (CaracterString(value)) {
+                if ((CaracterString(value)) || (!AnoValido(value))) {
                     while (flag) {
-                        value = JOptionPane.showInputDialog("Um ano deve possuir apenas numeros. Digite novamente.");
-                        if (!CaracterString(value)) {
+                        value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
+                        if ((!CaracterString(value)) && (AnoValido(value))) {
                             flag = false;
                         }
-                    }
-                } else {
-                    while (!AnoValido(value)) {
-                        value = JOptionPane.showInputDialog("Ano invalido. Digite novamente.");
                     }
                 }
             }
