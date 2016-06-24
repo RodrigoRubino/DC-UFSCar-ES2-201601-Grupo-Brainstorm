@@ -33,6 +33,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -371,6 +372,25 @@ public class BibEntry {
         }
 
         return true;
+    }
+
+    /*
+     * Funcao para criacao de uma bibtex automatica de 5 caracteres
+     * Podem haver caracteres com letras maiusculas e minusculas
+     */
+    public String BibtexAutomatica() {
+        char[] alfabeto = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz".toCharArray();
+        StringBuilder bibtex_aux = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            char chave = alfabeto[random.nextInt(alfabeto.length)];
+            bibtex_aux.append(chave);
+        }
+
+        String bibtex = bibtex_aux.toString();
+
+        return bibtex;
     }
 
     /**
